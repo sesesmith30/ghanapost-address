@@ -62,4 +62,3 @@ options is an object
 
 ## Contributing
 email me
-# ghanapost
