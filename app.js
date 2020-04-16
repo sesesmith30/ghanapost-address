@@ -24,28 +24,36 @@ exports.grabAddressInfo = async function (address, options) {
 		          speed:null
 		        }
 		      })
-		    }, 1000)
+		    }, options.timeout)
 		  }
 		});
 
 		await page.goto('https://ghanapostgps.com/mapview.html');
 
-		await page.waitForFunction('document.querySelector("#location-detail > div > span").innerText.length > 0');
+		await page.waitForFunction('document.querySelector("#location-detail > div > .da-code").innerText.length > 0');
 
-		const searchValue = await page.$eval('#location-detail > div > span', el => el.innerText);
+		const searchValue = await page.$eval('#location-detail > div > .da-code', el => el.innerText);
 
-		await page.click("#addrsearch");
+		await page.click("#addrsearch");	
 		await page.keyboard.type(address);
 
-		await page.click("#search > div.search-control > div > div.col-xs-2 > button");
+		await page.keyboard.press('Enter');
+		
+		// await page.click("#search > div.search-control > div > div.col-xs-2 > button");
 
-		await page.waitForFunction(`document.querySelector("#location-detail > div > span").innerText != '${searchValue}'`,{timeout: options.timeout || 10000 });
+		let d = await page.evaluate( () => {
+			let loc = document.querySelector("#location-detail > div > .da-code").innerText;
+			return {"d": loc};
+		})
 
-		const streetName = await page.$eval('#mainpage > div > div:nth-child(4) > ul > li:nth-child(1) > div.text-warning.bold', el => el.innerText);
-		const region = await page.$eval('#mainpage > div > div:nth-child(4) > ul > li:nth-child(2) > div.text-warning.bold', el => el.innerText);
-		const district = await page.$eval('#mainpage > div > div:nth-child(4) > ul > li:nth-child(3) > div.text-warning.bold', el => el.innerText);
-		const postCode = await page.$eval('#mainpage > div > div:nth-child(4) > ul > li:nth-child(4) > div.text-warning.bold', el => el.innerText);
-		const lngLat = await page.$eval('#mainpage > div > div:nth-child(4) > ul > li:nth-child(5) > div.text-warning.bold', el => el.innerText);
+		await page.waitForFunction(`document.querySelector("#location-detail > div > .da-code").innerText != '${searchValue}'`,{timeout: options.timeout || 10000 });
+
+		
+		const streetName = await page.$eval('.address-list > li.row:nth-child(2) > .col > .text-warning', el => el.innerText);
+		const region = await page.$eval('.address-list > li.row:nth-child(3) > .col > .text-warning', el => el.innerText);
+		const district = await page.$eval('.address-list > li.row:nth-child(4) > .col > .text-warning', el => el.innerText);
+		const postCode = await page.$eval('.address-list > li.row:nth-child(5) > .col > .text-warning', el => el.innerText);
+		const lngLat = await page.$eval('.address-list > li.row:nth-child(6) > .col > .text-warning', el => el.innerText);
 
 		const data = {
 			"streetName": streetName,
