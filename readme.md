@@ -17,7 +17,7 @@ npm install ghpost-address
 const ghpost = require('ghpost-address')
 
 
-addr.grabAddressInfo("AK-507-4460").then(function(res) {
+ghpost.grabAddressInfo("AK-507-4460").then(function(res) {
 
 	console.log(res);
 })
