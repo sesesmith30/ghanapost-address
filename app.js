@@ -41,8 +41,9 @@ exports.grabAddressInfo = async function (address, options) {
 		const streetName = await page.$eval('.address-list > li.row:nth-child(2) > .col > .text-warning', el => el.innerText);
 		const region = await page.$eval('.address-list > li.row:nth-child(3) > .col > .text-warning', el => el.innerText);
 		const district = await page.$eval('.address-list > li.row:nth-child(4) > .col > .text-warning', el => el.innerText);
-		const postCode = await page.$eval('.address-list > li.row:nth-child(5) > .col > .text-warning', el => el.innerText);
-		const lngLat = await page.$eval('.address-list > li.row:nth-child(6) > .col > .text-warning', el => el.innerText);
+		const areaCode = await page.$eval('.address-list > li.row:nth-child(5) > .col > .text-warning', el => el.innerText);
+		const postCode = await page.$eval('.address-list > li.row:nth-child(6) > .col > .text-warning', el => el.innerText);
+		const lngLat = await page.$eval('.address-list > li.row:nth-child(7) > .col > .text-warning', el => el.innerText);
 
 		const data = {
 			'DigitalAddress':address,
@@ -50,6 +51,7 @@ exports.grabAddressInfo = async function (address, options) {
 			"region": region,
 			"district": district,
 			"postCode": postCode,
+			"areaCode": areaCode,
 			"lngLat": lngLat
 		};
 
@@ -67,6 +69,7 @@ exports.grabAddressInfo = async function (address, options) {
 			"region": null,
 			"district": null,
 			"postCode": 'N/A',
+			"areaCode": "N/A",
 			"lngLat": 'N/A'
 		};
 	}
