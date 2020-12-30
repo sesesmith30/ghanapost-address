@@ -32,7 +32,7 @@ This will give you something similar to the following:
   region: 'Ashanti',
   district: 'Kumasi',
   postCode: 'AK507',
-  lngLat: '6.669813,-1.561062' 
+  latLng: '6.669813,-1.561062' 
 }
 
 ```
@@ -42,7 +42,7 @@ This will give you something similar to the following:
 ```js
 { grabAddressInfo: [AsyncFunction] }
 
-grabAddressInfo(adrress, options)
+grabAddressInfo(address, options)
 
 
 address can be PostCode, coodinates, Digital Address, Places
