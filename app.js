@@ -43,7 +43,7 @@ exports.grabAddressInfo = async function (address, options) {
 		const district = await page.$eval('.address-list > li.row:nth-child(4) > .col > .text-warning', el => el.innerText);
 		const areaCode = await page.$eval('.address-list > li.row:nth-child(5) > .col > .text-warning', el => el.innerText);
 		const postCode = await page.$eval('.address-list > li.row:nth-child(6) > .col > .text-warning', el => el.innerText);
-		const lngLat = await page.$eval('.address-list > li.row:nth-child(7) > .col > .text-warning', el => el.innerText);
+		const latLng = await page.$eval('.address-list > li.row:nth-child(7) > .col > .text-warning', el => el.innerText);
 
 		const data = {
 			'DigitalAddress':address,
@@ -52,7 +52,7 @@ exports.grabAddressInfo = async function (address, options) {
 			"district": district,
 			"postCode": postCode,
 			"areaCode": areaCode,
-			"lngLat": lngLat
+			"latLng": latLng
 		};
 
 		await browser.close();
@@ -70,7 +70,7 @@ exports.grabAddressInfo = async function (address, options) {
 			"district": null,
 			"postCode": 'N/A',
 			"areaCode": "N/A",
-			"lngLat": 'N/A'
+			"latLng": 'N/A'
 		};
 	}
 }
