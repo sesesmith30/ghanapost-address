@@ -1,7 +1,6 @@
-# *ghpost Address*
+# _ghpost Address_
 
 **A very Small infact a minute library for getting address info of a location using Ghana's Digital Adress System**,
-
 
 ## Installing
 
@@ -9,30 +8,25 @@
 npm install ghpost-address
 ```
 
-
-
 ## Usage
 
 ```js
-const ghpost = require('ghpost-address')
+const ghpost = require("ghpost-address");
 
-
-ghpost.grabAddressInfo("AK-507-4460").then(function(res) {
-
-	console.log(res);
-})
-
+ghpost.grabAddressInfo("AK-507-4460", { timeout: 100000 }).then(function (res) {
+  console.log(res);
+});
 ```
 
 This will give you something similar to the following:
 
 ```js
-{ 
+{
   streetName: 'Franco Hostel Rd, Kumasi, Ghana',
   region: 'Ashanti',
   district: 'Kumasi',
   postCode: 'AK507',
-  lngLat: '6.669813,-1.561062' 
+  lngLat: '6.669813,-1.561062'
 }
 
 ```
@@ -59,6 +53,6 @@ options is an object
 
 `options.timeout` is in milliseconds, optional and `10000ms` by default
 
-
 ## Contributing
+
 email me
